@@ -1,0 +1,58 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ReviewViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+
+@{ ViewData["Title"] = "EditReview"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+    <script type="text/javascript">
+
+        document.getElementById("example").setAttribute('value', 'My default value');
+    </script>
+    <style>
+        * {
+            background: #60bfbf !important;
+            color: white !important;
+        }
+        .container {
+            padding-top: 15% !important;
+            margin-top: 15% !important;
+            margin-left: -5%;
+        }
+    </style>
+
+    <div class="container">
+        <a href="javascript:history.back()">Go Back</a>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="EditReview">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="ReviewText" class="control-label"></label>
+                        <input asp-for="ReviewText" class="form-control" />
+                        <span asp-validation-for="ReviewText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Score" class="control-label"></label>
+                        <input asp-for="Score" class="form-control" />
+                        <span asp-validation-for="Score" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input hidden asp-for="MediaItemId" class="form-control" value="@Model.MediaItemId" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="EditReview" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Reviews", "ShowReviews", "Review", new { id = ViewData["MediaId"] });
+            })
+        </div>
+    </div>
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

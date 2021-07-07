@@ -1,0 +1,119 @@
+﻿<style>
+    .strip__content:not(.strip__inner-text):not(p):not(h2):not(h5) {
+        cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto !important;
+    }
+    h2{
+        font-size: 35px !important;
+    }
+    h5{
+        font-size: 25px !important;
+        font-style: italic !important;
+    }
+    p{
+        font-size: 20px !important;
+    }
+</style>
+@*<partial name="_LoginPartial" />*@
+<section class="strips">
+    <article class="strips__strip">
+        <div class="strip__content">
+            <h1 class="strip__title" data-name="Lorem">Film</h1>
+            <div class="strip__inner-text">
+                <h2>Movies...</h2>
+                <h5>Because reality in itself is too dull.</h5>
+                <p>
+                    @Html.ActionLink("Add films", "CreateFilm", "Film")
+                </p>
+                <p>
+                    @Html.ActionLink("View all films", "ShowFilms", "Film")
+                </p>
+                <p>
+                    @Html.ActionLink("View my films", "ShowMyFilms", "Film")
+                </p>
+                <p>
+                    @Html.ActionLink("Return to main", "Index", "Home")
+                </p>
+            </div>
+
+        </div>
+    </article>
+    <article class="strips__strip">
+        <div class="strip__content">
+            <h1 class="strip__title" data-name="Ipsum">Music</h1>
+            <div class="strip__inner-text">
+                <h2>Music</h2>
+                <h5>Life is music.</h5>
+                <p>
+                    @Html.ActionLink("Add music", "CreateMusic", "Music")
+                </p>
+                <p>
+                    @Html.ActionLink("View all music", "ShowMusic", "Music")
+                </p>
+                <p>
+                    @Html.ActionLink("Return to main", "Index", "Home")
+                </p>
+            </div>
+        </div>
+    </article>
+    <article class="strips__strip">
+        <div class="strip__content">
+            <h1 class="strip__title" data-name="Dolor">Podcast</h1>
+            <div class="strip__inner-text">
+                <h2>Podcast</h2>
+                <h5>Enjoying an interesting podcast.</h5>
+                <p>
+                    @Html.ActionLink("Add podcasts", "CreatePodcast", "Podcast")
+                </p>
+                <p>
+                    @Html.ActionLink("View all podcasts", "ShowPodcasts", "Podcast")
+                </p>
+                <p>
+                    @Html.ActionLink("Return to main", "Index", "Home")
+                </p>
+            </div>
+        </div>
+    </article>
+    <article class="strips__strip">
+        <div class="strip__content">
+            <h1 class="strip__title" data-name="Sit">TVSerie</h1>
+            <div class="strip__inner-text">
+                <h2>TVSerie</h2>
+                <h5>The best way to deliciously waste your time!</h5>
+                <p>
+                    @Html.ActionLink("Add TVSeries", "CreateTVSerie", "TVSerie")
+                </p>
+                <p>
+                    @Html.ActionLink("View all TVSeries", "ShowTVSeries", "TVSerie")
+                </p>
+                <p>
+                    @Html.ActionLink("Return to main", "Index", "Home")
+                </p>
+            </div>
+        </div>
+    </article>
+    <article class="strips__strip">
+        <div class="strip__content">
+            <h1 class="strip__title" data-name="Sit">USER</h1>
+            <div class="strip__inner-text">
+                <h2>Hello user.</h2>
+                <h5>More options for users are listed below.</h5>
+                <p>
+                    @Html.ActionLink("Create artists", "CreateArtist", "General")
+                </p>
+                <p>
+                    @Html.ActionLink("Create genres", "CreateGenre", "General")
+                </p>
+                <p>
+                    @Html.ActionLink("Show artists", "ShowArtists", "General")
+                </p>
+                <p>
+                    @Html.ActionLink("Show genres", "ShowGenres", "General")
+                </p>
+                <p>
+                    @Html.ActionLink("Return to main", "Index", "Home")
+                </p>
+            </div>
+        </div>
+    </article>
+    <i class="fa fa-close strip__close"></i>
+</section>

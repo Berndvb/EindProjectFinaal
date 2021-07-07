@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ProjectOefening.ServiceLayer.ViewModels.ReviewViewModel>
+
+@{ ViewData["Title"] = "ShowReviews"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15% !important;
+        margin-top: 15% !important;
+        margin-left: -5%;
+    }
+</style>
+
+<div class="container">
+        <div>
+            @switch (ViewData["MediaType"])
+            {
+                case "Film":
+                @Html.ActionLink("Go back", "ShowFilms", "Film", new { id = ViewData["MediaId"] });
+                break;
+                case "Music":
+                @Html.ActionLink("Go back", "ShowMusic", "Music", new { id = ViewData["MediaId"] });
+                break;
+                case "Podcast":
+                @Html.ActionLink("Go back", "ShowPodcasts", "Podcast", new { id = ViewData["MediaId"] });
+                break;
+                case "TVSerie":
+                @Html.ActionLink("Go back", "ShowTVSerie", "TVSerie", new { id = ViewData["MediaId"] });
+                break;
+                default:
+                break;
+                }
+        </div>
+        <div>
+            @Html.ActionLink("Create a review", "CreateReview", "Review", new { id = ViewData["MediaId"] })
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReviewText)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Score)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "EditReview", "Review", new { id = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteReview", "Review", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+    </tr>}
+            </tbody>
+        </table>
+</div>

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ProjectOefening.ServiceLayer.ViewModels.ShowFilmsViewModel>
+
+@{ ViewData["Title"] = "ShowFilms"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15% !important;
+        margin-top: 15% !important;
+    }
+</style>
+
+<div class="container">
+    <div class="topNav"> @Html.ActionLink("Main Menu", "Index", "Home")</div>
+    <div class="topNav"> @Html.ActionLink("Create New", "CreateFilm", "Film")</div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Actors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Directors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genres)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+                    <td>
+                        <a href="@Html.DisplayFor(modelItem => item.Url)">link</a>
+                    </td>
+                    <td>
+                    @if (item.Actors != null)
+                        {
+                             @foreach (var actor in item.Actors)
+                        {
+                        <p>@Html.DisplayFor(item => actor.Name)</p>} }
+                        else
+                        {
+                        <p>Empty</p>}
+                    </td>
+                    <td>
+                        @if (item.Directors != null)
+                        {
+                @foreach (var director in item.Directors)
+                {
+                <p>@Html.DisplayFor(item => director.Name)</p>} }
+                else
+                {
+                <p>Empty</p>}
+                    </td>
+                    <td>
+                        @if (item.Genres != null)
+                        {
+                @foreach (var genre in item.Genres)
+                {
+                <p>@Html.DisplayFor(item => genre.Name)</p>} }
+                else
+                {
+                <p>Empty</p>}
+                    </td>
+                    <td>
+                        <a asp-action="EditFilm" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="DeleteFilm" asp-route-id="@item.Id" asp-method="Delete">Delete</a> |
+                        @Html.ActionLink("Reviews", "ShowReviews", "Review", new { id = item.Id }) |
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>
+</div>

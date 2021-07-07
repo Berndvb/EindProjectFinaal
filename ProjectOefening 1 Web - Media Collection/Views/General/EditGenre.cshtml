@@ -1,0 +1,68 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.GenreViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+@using ProjectOefening.Domain.Genres 
+
+@{
+    ViewData["Title"] = "EditGenre";
+}
+
+<style>
+    * {
+        background: #f24b4b !important;
+        color: white !important;
+    }
+</style>
+
+<h1>EditGenre</h1>
+
+<h4>Genre</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditGenre">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="EditGenre" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Genretype" class="control-label"></label>
+                <select asp-for="Genretype" class="form-control" multiple>
+                    @foreach (string item in Enum.GetNames(typeof(GenreTypes)))
+                    {
+                        if (Model.Genretype.ToString().Equals(item))
+                        {
+                            <option value="@item" selected>
+                                @item
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@item">
+                                @item
+                            </option>
+                        }
+
+                    }
+                </select>
+                <span asp-validation-for="Genretype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="EditGenre" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowGenres">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

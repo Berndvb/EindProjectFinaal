@@ -1,0 +1,111 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.FilmViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+
+@{ ViewData["Title"] = "Create a Film"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15%;
+        margin-top: 18%;
+        padding-left: 20%;
+    }
+    .create {
+        display: flex;
+        padding-top: 110%;
+        margin-top: 15%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="create">
+                <div><partial id="partial" name="_CreateArtistPartial" /></div>
+                <div>  <partial id="partial" name="_CreateGenrePartial" /></div>
+            </div>
+            <form asp-action="CreateFilm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Actors" class="control-label"></label>
+                    <select asp-for="Actors" class="form-control" multiple>
+                        @if (ViewData["Actors"] != null)
+                        {
+            @foreach (var actor in (List<ArtistViewModel>)ViewData["Actors"])
+            {
+<option value="@actor.Id">
+    @actor.Name
+</option>} }
+        else
+        {
+<option selected disabled>No options available</option>}
+                    </select>
+                    <span asp-validation-for="Actors" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Directors" class="control-label"></label>
+                    <select asp-for="Directors" class="form-control" multiple>
+                        @if (ViewData["Directors"] != null)
+                        {
+            @foreach (var director in (List<ArtistViewModel>)ViewData["Directors"])
+            {
+<option value="@director.Id">
+    @director.Name
+</option>} }
+        else
+        {
+<option selected disabled>No options available</option>}
+                    </select>
+                    <span asp-validation-for="Directors" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genres" class="control-label"></label>
+                    <select asp-for="Genres" class="form-control" multiple>
+                        @if (ViewData["Genres"] != null)
+                        {
+            @foreach (var genre in (List<GenreViewModel>)ViewData["Genres"])
+            {
+<option value="@genre.Id">
+    @genre.Name
+</option>} }
+        else
+        {
+<option selected disabled>No options available</option>}
+                    </select>
+                    <span asp-validation-for="Genres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReleaseDate" class="control-label"></label>
+                    <input asp-for="ReleaseDate" class="form-control" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="CreateFilm" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ShowFilms">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

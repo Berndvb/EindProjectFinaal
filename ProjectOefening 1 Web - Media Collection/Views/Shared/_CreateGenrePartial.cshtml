@@ -1,0 +1,53 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.GenreViewModel
+@using ProjectOefening.Domain.Genres
+
+@{
+    ViewData["Title"] = "Create a Genre";
+}
+
+<style>
+    #form {
+        border: 2px solid white;
+        margin: 5px;
+        padding: 5px;
+        flex: 1;
+    }
+</style>
+
+<div>
+    <div>
+        <p> Create a new genre: </p>
+        <div>
+            <form asp-action="CreateGenre" id="form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="Genretype" class="control-label"></label>
+                    <select asp-for="Genretype" class="form-control">
+                        @foreach (string item in Enum.GetNames(typeof(GenreTypes)))
+                        {
+                            <option value="@item">
+                                @item
+                            </option>
+                        }
+                    </select>
+                    <span asp-validation-for="Genretype" class="text-danger"></span>
+                </div>
+                <br />
+                <div>
+                    <input type="submit" value="CreateGenre" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <p> Or pick one from the list below </p>
+    </div>
+</div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

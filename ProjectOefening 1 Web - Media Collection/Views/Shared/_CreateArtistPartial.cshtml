@@ -1,0 +1,48 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ArtistViewModel
+@using ProjectOefening.ServiceLayer.ViewModels
+@using ProjectOefening.Domain
+
+<style>
+    #form {
+        border: 2px solid white;
+        margin: 5px;
+        padding: 5px;
+        flex: 0 0 65%;
+    }
+</style>
+<div>
+    <p> Create a new artist: </p>
+    <div>
+        <form asp-action="CreateArtist" id="form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="ArtistType" class="control-label"></label>
+                <select asp-for="ArtistType" class="form-control">
+                    @foreach (string item in Enum.GetNames(typeof(ArtistTypes)))
+                    {
+                        <option value="@item">
+                            @item
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="ArtistType" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <input type="submit" value="CreateArtist" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <p> Or pick one from the list below </p>
+</div>
+<br />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

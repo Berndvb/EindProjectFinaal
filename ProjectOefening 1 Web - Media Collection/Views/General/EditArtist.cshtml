@@ -1,0 +1,67 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ArtistViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+@using ProjectOefening.Domain
+
+@{
+    ViewData["Title"] = "EditArtist";
+}
+
+<style>
+    * {
+        background: #f24b4b !important;
+        color: white !important;
+    }
+</style>
+
+<h1>EditArtist</h1>
+
+<h4>Artist</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditArtist">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="EditArtist" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtistType" class="control-label"></label>
+                <select asp-for="ArtistType" class="form-control" multiple>
+                    @foreach (var item in Enum.GetNames(typeof(ArtistTypes)))
+                    {
+                        if (Model.ArtistType.ToString().Equals(item))
+                        {
+                            <option value="@item" selected>
+                                @item
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@item">
+                                @item
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ArtistType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="EditArtist" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowArtists">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

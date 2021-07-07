@@ -1,0 +1,117 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ShowMusicViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+
+@{ ViewData["Title"] = "EditMusic"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15% !important;
+        margin-top: 18% !important;
+    }
+</style>
+<div class="container">
+    <div class="topNav"> @Html.ActionLink("Main Menu", "Index", "Home")</div>
+    <div class="topNav"> @Html.ActionLink("Create New", "CreateFilm", "Film")</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditMusic">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReleaseDate" class="control-label"></label>
+                    <input asp-for="ReleaseDate" class="form-control" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MusicArtists" class="control-label"></label>
+                    <select asp-for="MusicArtists" class="form-control" multiple>
+                        @foreach (var artist in (List<ArtistViewModel>)ViewData["MusicArtists"])@*eerder iets voor JS (zeker bij ajaxcall)*@ {
+                                        var artistFound = false;
+                                        if (Model.MusicArtists != null)
+                                        {
+                                            foreach (var addedArtist in Model.MusicArtists)
+                                            {
+                                                if (addedArtist.Id.Equals(artist.Id))
+                                                {
+                                                    artistFound = true;
+                                                }
+                                            }
+                                        }
+
+                                        if (artistFound == true)
+                                        {
+                        <option value="@artist.Id" selected>
+                            @artist.Name
+                        </option> }
+                                        else
+                                        {
+                        <option value="@artist.Id">
+                            @artist.Name
+                        </option>}
+                                    }
+                    </select>
+                    <span asp-validation-for="MusicArtists" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genres" class="control-label"></label>
+                    <select asp-for="Genres" class="form-control" multiple>
+                        @foreach (var genre in (List<GenreViewModel>)ViewData["Genres"])
+                        {
+                            var genreFound = false;
+                            if (Model.MusicArtists != null)
+                            {
+                                foreach (var addedGenre in Model.Genres)
+                                {
+                                    if (addedGenre.Id.Equals(genre.Id))
+                                    {
+                                        genreFound = true;
+                                    }
+                                }
+                            }
+
+                            if (genreFound == true)
+                            {
+            <option value="@genre.Id" selected>
+                @genre.Name
+            </option> }
+                            else
+                            {
+            <option value="@genre.Id">
+                @genre.Name
+            </option>}
+                        }
+                    </select>
+                    <span asp-validation-for="Genres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="EditMusic" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ShowMusic">Back to List</a>
+    </div>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

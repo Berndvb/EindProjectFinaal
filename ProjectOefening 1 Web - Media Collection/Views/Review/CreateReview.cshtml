@@ -1,0 +1,44 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ReviewViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+
+@{
+    ViewData["Title"] = "CreateReview";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15% !important;
+        margin-top: 15% !important;
+    }
+</style>
+
+<div class="container">
+    <div class="topNav"> @Html.ActionLink("Main Menu", "Index", "Home")</div>
+    <div class="topNav"> @Html.ActionLink("Back to reviews", "ShowReviews", "Review", new { id = ViewData["MediaId"] })</div>
+    <form asp-action="CreateReview">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ReviewText" class="control-label"></label>
+            <input asp-for="ReviewText" class="form-control" />
+            <span asp-validation-for="ReviewText" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Score" class="control-label"></label>
+            <input asp-for="Score" class="form-control" />
+            <span asp-validation-for="Score" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input hidden asp-for="MediaItemId" class="form-control" value="@ViewData["MediaId"]" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="CreateReview" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

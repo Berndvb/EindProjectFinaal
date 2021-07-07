@@ -1,0 +1,149 @@
+﻿@model ProjectOefening.ServiceLayer.ViewModels.ShowPodcastViewModel
+@using  ProjectOefening.ServiceLayer.ViewModels;
+
+@{ ViewData["Title"] = "EditPodcast"; }
+<head>
+    <link rel="stylesheet" href="~/css/Show.css" />
+</head>
+
+<style>
+    .container {
+        padding-top: 15% !important;
+        margin-top: 18% !important;
+    }
+</style>
+<div class="container">
+    <div class="topNav"> @Html.ActionLink("Main Menu", "Index", "Home")</div>
+    <div class="topNav"> @Html.ActionLink("Create New", "CreateFilm", "Film")</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditPodcast">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReleaseDate" class="control-label"></label>
+                    <input asp-for="ReleaseDate" class="form-control" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Guests" class="control-label"></label>
+                    <select asp-for="Guests" class="form-control" multiple>
+                        @foreach (var guest in (List<ArtistViewModel>)ViewData["Guests"])
+                        {
+                            var guestFound = false;
+                            if (Model.Guests != null)
+                            {
+                                foreach (var addedGuest in Model.Guests)
+                                {
+                                    if (addedGuest.Id.Equals(guest.Id))
+                                    {
+                                        guestFound = true;
+                                    }
+                                }
+                            }
+
+                            if (guestFound == true)
+                            {
+            <option value="@guest.Id" selected>
+                @guest.Name
+            </option> }
+                            else
+                            {
+            <option value="@guest.Id">
+                @guest.Name
+            </option>}
+                        }
+                    </select>
+                    <span asp-validation-for="Guests" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Hosts" class="control-label"></label>
+                    <select asp-for="Hosts" class="form-control" multiple>
+                        @foreach (var host in (List<ArtistViewModel>)ViewData["Hosts"])
+                        {
+                            var hostFound = false;
+                            if (Model.Hosts != null)
+                            {
+                                foreach (var addedHost in Model.Hosts)
+                                {
+                                    if (addedHost.Id.Equals(host.Id))
+                                    {
+                                        hostFound = true;
+                                    }
+                                }
+                            }
+
+                            if (hostFound == true)
+                            {
+            <option value="@host.Id" selected>
+                @host.Name
+            </option> }
+                            else
+                            {
+            <option value="@host.Id">
+                @host.Name
+            </option>}
+                        }
+                    </select>
+                    <span asp-validation-for="Hosts" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genres" class="control-label"></label>
+                    <select asp-for="Genres" class="form-control" multiple>
+                        @foreach (var genre in (List<GenreViewModel>)ViewData["Genres"])
+                        {
+                            var genreFound = false;
+                            if (Model.Genres != null)
+                            {
+                                foreach (var addedGenre in Model.Genres)
+                                {
+                                    if (addedGenre.Id.Equals(genre.Id))
+                                    {
+                                        genreFound = true;
+                                    }
+                                }
+                            }
+
+                            if (genreFound == true)
+                            {
+            <option value="@genre.Id" selected>
+                @genre.Name
+            </option> }
+                            else
+                            {
+            <option value="@genre.Id">
+                @genre.Name
+            </option>}
+                        }
+                    </select>
+                    <span asp-validation-for="Genres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="EditPodcast" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ShowPodcasts">Back to List</a>
+    </div>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
