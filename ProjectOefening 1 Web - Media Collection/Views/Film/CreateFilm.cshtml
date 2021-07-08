@@ -2,22 +2,25 @@
 @using  ProjectOefening.ServiceLayer.ViewModels;
 
 @{ ViewData["Title"] = "Create a Film"; }
+
 <head>
     <link rel="stylesheet" href="~/css/Show.css" />
 </head>
 
-<style>
-    .container {
-        padding-top: 15%;
-        margin-top: 18%;
-        padding-left: 20%;
-    }
-    .create {
-        display: flex;
-        padding-top: 110%;
-        margin-top: 15%;
-    }
-</style>
+@section Styles{
+    <style>
+        .container {
+            padding-top: 15%;
+            margin-top: 18%;
+            padding-left: 20%;
+        }
+        .create {
+            display: flex;
+            padding-top: 110%;
+            margin-top: 15%;
+        }
+    </style>
+}
 <div class="container">
     <div class="row">
         <div class="col-md-4">
